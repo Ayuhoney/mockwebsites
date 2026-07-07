@@ -1,48 +1,49 @@
-import { useState, useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Building2, Layers, BarChart3, Hammer, HardHat, RefreshCw, ChevronDown } from 'lucide-react';
 
 const services = [
   {
-    id: 'skin',
-    title: 'Advanced\nSkincare',
-    tag: '01 — Skin',
-    desc: 'Medical-grade facials, custom peel regimens, and cellular rejuvenation protocols. HydraFacial, Dermaplane, enzymatic peels — all tailored to your unique skin profile.',
-    img: 'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&w=900&h=1200&dpr=1',
+    icon: Building2,
+    title: 'Architecture & Design',
+    desc: 'Visionary architectural concepts translated into iconic structures. From concept to construction drawings, we deliver designs that stand the test of time.',
+    tags: ['BIM Modeling', 'Conceptual Design', 'Technical Drawing'],
   },
   {
-    id: 'laser',
-    title: 'Laser\nTherapy',
-    tag: '02 — Laser',
-    desc: 'State-of-the-art laser technology for hair removal, skin resurfacing, pigmentation correction, and vascular lesions. IPL, CO₂ Fractional, Nd:YAG — precision at its finest.',
-    img: 'https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=900&h=1200&dpr=1',
+    icon: HardHat,
+    title: 'Structural Engineering',
+    desc: 'Advanced structural analysis and engineering solutions for complex high-rise and large-span structures. Safety and efficiency in every calculation.',
+    tags: ['Seismic Analysis', 'Load Engineering', 'Foundation Design'],
   },
   {
-    id: 'injectables',
-    title: 'Injectables\n& Fillers',
-    tag: '03 — Injectables',
-    desc: 'Natural, harmonious results through precision toxin and filler placement. Botox, Sculptra, Restylane, Juvederm — art-guided, evidence-based enhancement.',
-    img: 'https://images.pexels.com/photos/7108344/pexels-photo-7108344.jpeg?auto=compress&cs=tinysrgb&w=900&h=1200&dpr=1',
+    icon: BarChart3,
+    title: 'Project Management',
+    desc: 'End-to-end construction management with rigorous cost control, scheduling, and quality assurance protocols to deliver on time and on budget.',
+    tags: ['Scheduling', 'Cost Control', 'Risk Management'],
   },
   {
-    id: 'body',
-    title: 'Body\nContouring',
-    tag: '04 — Body',
-    desc: 'Non-surgical fat reduction and skin tightening. CoolSculpting Elite, HIFU, radiofrequency lifting — sculpt your silhouette without downtime.',
-    img: 'https://images.pexels.com/photos/4046567/pexels-photo-4046567.jpeg?auto=compress&cs=tinysrgb&w=900&h=1200&dpr=1',
+    icon: Layers,
+    title: 'Interior Architecture',
+    desc: 'Interior environments designed for human experience. Commercial, hospitality, and residential interiors that are both functional and inspiring.',
+    tags: ['Space Planning', 'FF&E Selection', 'Lighting Design'],
   },
   {
-    id: 'surgery',
-    title: 'Surgical\nProcedures',
-    tag: '05 — Surgery',
-    desc: 'Minimally invasive and surgical cosmetic procedures by board-certified plastic surgeons. Rhinoplasty, blepharoplasty, liposuction — transformative, lasting results.',
-    img: 'https://images.pexels.com/photos/4226122/pexels-photo-4226122.jpeg?auto=compress&cs=tinysrgb&w=900&h=1200&dpr=1',
+    icon: Hammer,
+    title: 'Civil Engineering',
+    desc: 'Infrastructure engineering for roads, bridges, utilities, and earthworks. We handle the complex ground-up challenges of large-scale civil projects.',
+    tags: ['Site Development', 'Drainage Systems', 'Road & Bridge'],
+  },
+  {
+    icon: RefreshCw,
+    title: 'Renovation & Retrofit',
+    desc: 'Breathing new life into existing structures. Structural reinforcement, facade upgrades, MEP retrofit, and adaptive reuse projects.',
+    tags: ['Structural Upgrade', 'MEP Retrofit', 'Adaptive Reuse'],
   },
 ];
 
 export default function Services() {
-  const [hovered, setHovered] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [expanded, setExpanded] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,119 +55,135 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="bg-warm-50">
-      {/* Header */}
-      <div
-        ref={ref}
-        className={`max-w-screen-xl mx-auto px-8 lg:px-14 pt-24 pb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-6 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-      >
-        <div>
-          <div className="eyebrow text-champagne-600 mb-5">
-            <span className="eyebrow-line" />
-            <span>What We Offer</span>
-          </div>
-          <h2
-            className="font-serif font-light text-warm-900 leading-[0.95]"
-            style={{ fontSize: 'clamp(48px, 5vw, 80px)' }}
-          >
-            Treatments Crafted<br />
-            <em className="italic text-blush-500">for Every Goal</em>
-          </h2>
-        </div>
-        <p className="text-warm-500 text-sm leading-relaxed max-w-xs lg:mb-2">
-          Hover each panel to explore — every treatment starts with a bespoke consultation.
-        </p>
-      </div>
-
-      {/* Desktop: Horizontal accordion */}
-      <div
-        className="hidden lg:flex h-[70vh] min-h-[500px]"
-        onMouseLeave={() => setHovered(null)}
-      >
-        {services.map((s, i) => {
-          const isActive = hovered === i;
-          const isInactive = hovered !== null && !isActive;
-          return (
+    <section id="services" className="bg-stone-900 py-28">
+      <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <div ref={ref} className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+          <div>
             <div
-              key={s.id}
-              className="service-panel relative overflow-hidden cursor-pointer group"
-              style={{
-                flex: hovered === null ? 1 : isActive ? 4.5 : 0.6,
-              }}
-              onMouseEnter={() => setHovered(i)}
+              className="eyebrow text-stone-600 mb-6"
+              style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.1s' }}
             >
-              {/* Image */}
-              <img
-                src={s.img}
-                alt={s.title}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                style={{ transform: isActive ? 'scale(1.05)' : 'scale(1.02)' }}
-              />
-              {/* Gradient */}
+              <span className="eyebrow-line" />
+              <span>What We Do</span>
+            </div>
+            <h2
+              className="font-serif font-light text-white leading-[0.92]"
+              style={{
+                fontSize: 'clamp(38px, 5vw, 68px)',
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                transition: 'all 0.7s ease 0.2s',
+              }}
+            >
+              Full-Spectrum<br />
+              <em className="not-italic text-amber-400">Construction Services</em>
+            </h2>
+          </div>
+          <p
+            className="text-stone-400 text-sm leading-relaxed max-w-sm"
+            style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease 0.35s' }}
+          >
+            From initial concept through final handover, our integrated team handles every phase with precision and expertise.
+          </p>
+        </div>
+
+        {/* Service grid — desktop cards / mobile accordion */}
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: 'rgba(255,255,255,0.05)' }}>
+          {services.map(({ icon: Icon, title, desc, tags }, i) => (
+            <div
+              key={title}
+              className="group bg-stone-900 p-8 hover:bg-stone-800 transition-all duration-300 cursor-default"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(24px)',
+                transition: `all 0.6s ease ${i * 80 + 300}ms`,
+              }}
+            >
+              {/* Icon */}
               <div
-                className="absolute inset-0 transition-all duration-700"
+                className="w-12 h-12 flex items-center justify-center mb-6 transition-all duration-300"
+                style={{ border: '1px solid rgba(245,181,32,0.25)', background: 'rgba(245,181,32,0.05)' }}
+              >
+                <Icon className="w-5 h-5 text-amber-400" />
+              </div>
+
+              <div className="text-[10px] tracking-[0.25em] uppercase text-stone-600 mb-3 font-mono">
+                {String(i + 1).padStart(2, '0')}
+              </div>
+
+              <h3 className="font-serif text-lg font-light text-white mb-3 group-hover:text-amber-400 transition-colors">
+                {title}
+              </h3>
+
+              {/* Amber accent line */}
+              <div
+                className="h-px mb-4 transition-all duration-400"
                 style={{
-                  background: isActive
-                    ? 'linear-gradient(to top, rgba(26,18,12,0.9) 0%, rgba(26,18,12,0.3) 50%, rgba(26,18,12,0.1) 100%)'
-                    : 'linear-gradient(to top, rgba(26,18,12,0.7) 0%, rgba(26,18,12,0.4) 60%, rgba(26,18,12,0.2) 100%)',
+                  background: 'linear-gradient(to right, rgba(245,181,32,0.6), transparent)',
+                  width: '0',
+                }}
+                ref={(el) => {
+                  if (!el) return;
+                  const parent = el.closest('.group');
+                  parent?.addEventListener('mouseenter', () => { el.style.width = '2rem'; });
+                  parent?.addEventListener('mouseleave', () => { el.style.width = '0'; });
                 }}
               />
 
-              {/* Collapsed: vertical label */}
-              <div
-                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isInactive || isActive ? 'opacity-0' : 'opacity-100'}`}
-              >
-                <span
-                  className="writing-vertical text-[11px] tracking-[0.3em] uppercase font-medium text-white/70"
-                >
-                  {s.tag}
-                </span>
-              </div>
+              <p className="text-stone-400 text-sm leading-relaxed mb-5">{desc}</p>
 
-              {/* Expanded: full content */}
-              <div
-                className={`absolute bottom-0 left-0 right-0 p-10 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              >
-                <div className="text-[10px] tracking-[0.3em] uppercase font-medium text-champagne-400 mb-3">{s.tag}</div>
-                <h3 className="font-serif text-4xl font-light text-white mb-4 leading-tight whitespace-pre-line">
-                  {s.title}
-                </h3>
-                <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-xs">{s.desc}</p>
-                <button
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center gap-3 text-[11px] tracking-[0.2em] uppercase font-medium text-white border-b border-white/40 pb-0.5 hover:border-white transition-colors"
-                >
-                  Book This Treatment
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 text-[9px] tracking-[0.2em] uppercase text-stone-500"
+                    style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
 
-      {/* Mobile: vertical grid */}
-      <div className="lg:hidden grid sm:grid-cols-2 gap-4 px-8 pb-16">
-        {services.map((s) => (
-          <div key={s.id} className="relative aspect-[4/5] overflow-hidden group cursor-pointer">
-            <img
-              src={s.img}
-              alt={s.title}
-              className="w-full h-full object-cover img-zoom"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-warm-900/85 via-warm-900/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="text-[10px] tracking-[0.25em] uppercase text-champagne-400 mb-1">{s.tag}</div>
-              <h3 className="font-serif text-2xl font-light text-white leading-tight whitespace-pre-line">{s.title}</h3>
+        {/* Mobile accordion */}
+        <div className="md:hidden flex flex-col">
+          {services.map(({ icon: Icon, title, desc, tags }, i) => (
+            <div
+              key={title}
+              className="border-b border-stone-800"
+              style={{ opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${i * 80}ms` }}
+            >
               <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="mt-3 inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/70 hover:text-white"
+                className="w-full flex items-center justify-between py-5 text-left"
+                onClick={() => setExpanded(expanded === i ? null : i)}
               >
-                Book <ArrowRight className="w-3 h-3" />
+                <div className="flex items-center gap-3">
+                  <Icon className="w-5 h-5 text-amber-400 flex-shrink-0" />
+                  <span className="font-serif text-base text-white">{title}</span>
+                </div>
+                <ChevronDown
+                  className="w-4 h-4 text-stone-500 flex-shrink-0 transition-transform"
+                  style={{ transform: expanded === i ? 'rotate(180deg)' : 'rotate(0)' }}
+                />
               </button>
+              {expanded === i && (
+                <div className="pb-5">
+                  <p className="text-stone-400 text-sm leading-relaxed mb-4">{desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <span key={tag} className="px-2 py-1 text-[9px] tracking-[0.2em] uppercase text-stone-500 border border-stone-700">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

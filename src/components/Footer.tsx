@@ -1,57 +1,57 @@
-import { Instagram, Facebook, Youtube } from 'lucide-react';
+import { Linkedin, Twitter, Instagram } from 'lucide-react';
 
-const links = {
-  Treatments: ['Advanced Skincare', 'Laser Therapy', 'Injectables', 'Body Contouring', 'Surgery'],
-  Clinic:     ['About Us', 'Our Team', 'Technology & Equipment', 'Press & Awards', 'Careers'],
-  Legal:      ['Privacy Policy', 'Terms of Service', 'Cookie Notice', 'Accessibility'],
+const columns = {
+  Services: ['Architecture & Design', 'Structural Engineering', 'Project Management', 'Interior Architecture', 'Civil Engineering', 'Renovation & Retrofit'],
+  Projects: ['Commercial Towers', 'Residential Complexes', 'Infrastructure', 'Industrial Facilities', 'Public Works'],
+  Company:  ['About Structura', 'Our Team', 'Careers', 'Press & Awards', 'Sustainability', 'Contact Us'],
 };
 
 export default function Footer() {
   return (
-    <footer className="bg-warm-900 text-white">
-      {/* Newsletter bar */}
-      <div className="border-b border-warm-800">
-        <div className="max-w-screen-xl mx-auto px-8 lg:px-14 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <footer className="bg-stone-900 text-white">
+      {/* CTA banner */}
+      <div style={{ background: '#F5B520' }}>
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="font-serif text-xl font-light text-white mb-1">Stay in the know.</p>
-            <p className="text-warm-500 text-sm">Clinic news, expert tips, and exclusive offers — delivered beautifully.</p>
+            <p className="font-serif text-xl font-light text-stone-900">Ready to break ground?</p>
+            <p className="text-stone-700 text-sm">Speak with a senior project consultant today.</p>
           </div>
-          <form className="flex gap-0 w-full md:w-auto min-w-72" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="your@email.com"
-              className="flex-1 bg-warm-800 border border-warm-700 focus:border-warm-500 focus:outline-none text-warm-200 placeholder-warm-600 px-5 py-3 text-sm transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-blush-500 hover:bg-blush-600 text-white text-xs tracking-[0.2em] uppercase font-medium transition-colors flex-shrink-0"
-            >
-              Subscribe
-            </button>
-          </form>
+          <button
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="flex items-center gap-2 bg-stone-900 text-white px-6 py-3 text-[11px] tracking-[0.2em] uppercase font-semibold hover:bg-stone-800 transition-colors flex-shrink-0"
+          >
+            Get a Free Consultation
+          </button>
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="max-w-screen-xl mx-auto px-8 lg:px-14 pt-16 pb-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 mb-14">
+      {/* Main */}
+      <div className="max-w-screen-xl mx-auto px-6 lg:px-12 pt-16 pb-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-12 mb-16">
           {/* Brand */}
           <div>
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="mb-5 text-left group block"
-            >
-              <div className="font-serif text-2xl font-light text-white tracking-[0.06em] mb-1">Beauty Redefined</div>
-              <div className="text-[9px] tracking-[0.35em] uppercase text-warm-600">Skin · Laser · Surgery</div>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="mb-6 text-left block">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative w-7 h-7 flex-shrink-0">
+                  <div className="absolute inset-0 border border-amber-400 rotate-45 scale-75" />
+                  <div className="absolute inset-[5px] bg-amber-400 rotate-45 scale-75" />
+                </div>
+                <span className="font-sans font-bold text-white tracking-[0.2em] text-sm">STRUCTURA</span>
+              </div>
+              <div className="text-[9px] tracking-[0.3em] uppercase text-stone-600">Build · Design · Innovate</div>
             </button>
-            <p className="text-warm-500 text-sm leading-relaxed max-w-xs mb-8">
-              Premium aesthetic medicine where science meets artistry. Board-certified specialists. Medical-grade technology. Deeply personal care.
+
+            <p className="text-stone-500 text-sm leading-relaxed max-w-xs mb-8">
+              Global construction and architecture firm delivering landmark structures across 40+ countries since 2000.
             </p>
+
+            {/* Social */}
             <div className="flex gap-3">
-              {[Instagram, Facebook, Youtube].map((Icon, i) => (
+              {[Linkedin, Twitter, Instagram].map((Icon, i) => (
                 <button
                   key={i}
-                  className="w-10 h-10 border border-warm-800 hover:border-blush-500 flex items-center justify-center text-warm-600 hover:text-blush-400 transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center text-stone-500 hover:text-amber-400 transition-colors"
+                  style={{ border: '1px solid rgba(255,255,255,0.1)' }}
                 >
                   <Icon className="w-4 h-4" />
                 </button>
@@ -60,13 +60,13 @@ export default function Footer() {
           </div>
 
           {/* Link columns */}
-          {Object.entries(links).map(([section, items]) => (
+          {Object.entries(columns).map(([section, items]) => (
             <div key={section}>
-              <h4 className="text-[10px] tracking-[0.28em] uppercase font-medium text-warm-500 mb-5">{section}</h4>
+              <h4 className="text-[10px] tracking-[0.3em] uppercase font-semibold text-stone-500 mb-5">{section}</h4>
               <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item}>
-                    <button className="text-sm text-warm-400 hover:text-white transition-colors text-left">
+                    <button className="text-sm text-stone-400 hover:text-white transition-colors text-left">
                       {item}
                     </button>
                   </li>
@@ -76,18 +76,21 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Certifications bar */}
-        <div className="border-t border-warm-800 pt-8 pb-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
-            {['Board Certified', 'FDA Approved', 'ISO 9001', 'IAHRS Member'].map((cert) => (
-              <span key={cert} className="text-[10px] tracking-[0.2em] uppercase text-warm-700 flex items-center gap-2">
-                <span className="w-1 h-1 rounded-full bg-champagne-600" />
+        {/* Bottom bar */}
+        <div
+          className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+        >
+          <div className="flex flex-wrap items-center gap-6">
+            {['ISO 9001', 'Board Certified Engineers', 'LEED Certified', 'FIDIC Member'].map((cert) => (
+              <span key={cert} className="text-[10px] tracking-[0.18em] uppercase text-stone-700 flex items-center gap-2">
+                <span className="w-1 h-1 rotate-45 bg-amber-600 flex-shrink-0" />
                 {cert}
               </span>
             ))}
           </div>
-          <p className="text-[11px] text-warm-700">
-            &copy; {new Date().getFullYear()} Beauty Redefined. All rights reserved.
+          <p className="text-[11px] text-stone-700">
+            © {new Date().getFullYear()} Structura Ltd. All rights reserved.
           </p>
         </div>
       </div>

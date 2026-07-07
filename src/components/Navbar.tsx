@@ -1,144 +1,126 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 const links = [
-  { label: 'Services',     id: 'services'     },
-  { label: 'About',        id: 'about'        },
-  { label: 'Treatments',   id: 'treatments'   },
-  { label: 'Testimonials', id: 'testimonials' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Services', id: 'services' },
+  { label: 'About',    id: 'about' },
+  { label: 'Contact',  id: 'contact' },
 ];
 
 export default function Navbar() {
-  const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll(); // set initial state
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const handler = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  const go = (id: string) => {
-    setOpen(false);
+  const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setOpen(false);
   };
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-warm-50/96 backdrop-blur-xl border-b border-warm-200/70 shadow-md shadow-warm-900/5'
-            : 'bg-gradient-to-b from-black/55 via-black/15 to-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        style={{
+          background: scrolled
+            ? 'rgba(14,11,8,0.95)'
+            : 'linear-gradient(to bottom, rgba(14,11,8,0.72) 0%, rgba(14,11,8,0.3) 60%, transparent 100%)',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(245,181,32,0.12)' : 'none',
+        }}
       >
-        <div className="max-w-screen-xl mx-auto px-8 lg:px-14 flex items-center justify-between h-[72px]">
-
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
           {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex flex-col leading-none"
-          >
-            <span
-              className={`font-serif text-[22px] font-light tracking-[0.08em] transition-colors duration-300 ${
-                scrolled ? 'text-warm-900' : 'text-white'
-              }`}
-            >
-              Beauty Redefined
-            </span>
-            <span
-              className={`font-sans text-[9px] tracking-[0.35em] uppercase mt-0.5 transition-colors duration-300 ${
-                scrolled ? 'text-champagne-600' : 'text-white/70'
-              }`}
-            >
-              Skin · Laser · Surgery
-            </span>
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="group">
+            <div className="flex items-center gap-3">
+              {/* Mark */}
+              <div className="relative w-8 h-8 flex-shrink-0">
+                <div className="absolute inset-0 border border-amber-400 rotate-45 scale-75 transition-transform group-hover:rotate-[135deg] duration-500" />
+                <div className="absolute inset-[5px] bg-amber-400 rotate-45 scale-75" />
+              </div>
+              <div>
+                <div className="font-sans font-bold text-white tracking-[0.22em] text-sm leading-none">STRUCTURA</div>
+                <div className="font-sans text-[9px] tracking-[0.3em] text-stone-300 uppercase leading-none mt-0.5">Build · Design · Innovate</div>
+              </div>
+            </div>
           </button>
 
-          {/* Desktop nav links */}
+          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-10">
             {links.map(({ label, id }) => (
               <button
                 key={id}
-                onClick={() => go(id)}
-                className={`text-[11px] tracking-[0.2em] uppercase font-medium transition-colors duration-200 ${
-                  scrolled
-                    ? 'text-warm-700 hover:text-blush-500'
-                    : 'text-white hover:text-blush-300'
-                }`}
+                onClick={() => scrollTo(id)}
+                className="amber-underline text-[11px] font-semibold tracking-[0.22em] uppercase text-stone-200 hover:text-white transition-colors"
               >
                 {label}
               </button>
             ))}
           </nav>
 
-          {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-5">
+          {/* CTA */}
+          <div className="hidden lg:flex items-center gap-4">
             <button
-              onClick={() => go('contact')}
-              className={`hidden lg:inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-medium px-6 py-2.5 transition-all duration-300 ${
-                scrolled
-                  ? 'bg-warm-900 text-warm-50 hover:bg-blush-600'
-                  : 'bg-white/15 backdrop-blur-sm text-white border border-white/40 hover:bg-white/25 hover:border-white/60'
-              }`}
+              onClick={() => scrollTo('contact')}
+              className="btn-primary group"
             >
-              Book Now
-            </button>
-            <button
-              onClick={() => setOpen(!open)}
-              className={`lg:hidden transition-colors ${
-                scrolled ? 'text-warm-800' : 'text-white'
-              }`}
-              aria-label="Toggle menu"
-            >
-              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              Get a Quote
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2 text-white"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </header>
 
-      {/* Mobile drawer overlay */}
+      {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${
-          open ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
+        className="fixed inset-0 z-40 lg:hidden transition-all duration-300"
+        style={{ opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none' }}
       >
         <div
-          className={`absolute inset-0 backdrop-blur-sm transition-opacity duration-300 ${
-            open ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{ backgroundColor: 'rgba(26,18,12,0.65)' }}
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(14,11,8,0.85)' }}
           onClick={() => setOpen(false)}
         />
         <div
-          className={`absolute top-0 right-0 bottom-0 w-72 flex flex-col pt-24 px-10 transition-transform duration-300 ${
-            open ? 'translate-x-0' : 'translate-x-full'
-          }`}
-          style={{ backgroundColor: '#FAF8F5' }}
+          className="absolute top-0 right-0 bottom-0 w-72 flex flex-col p-8 pt-24"
+          style={{
+            backgroundColor: '#1C1810',
+            borderLeft: '1px solid rgba(245,181,32,0.15)',
+            transform: open ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
+          }}
         >
-          <nav className="flex flex-col gap-7">
+          <nav className="flex flex-col gap-6 mb-10">
             {links.map(({ label, id }) => (
               <button
                 key={id}
-                onClick={() => go(id)}
-                className="text-left font-serif text-2xl font-light text-warm-800 hover:text-blush-500 transition-colors"
+                onClick={() => scrollTo(id)}
+                className="text-left text-lg font-serif font-light text-stone-100 hover:text-amber-400 transition-colors"
               >
                 {label}
               </button>
             ))}
           </nav>
-          <button
-            onClick={() => go('contact')}
-            className="mt-10 btn-dark self-start"
-          >
-            Book Consultation
+          <button onClick={() => scrollTo('contact')} className="btn-primary justify-center">
+            Get a Quote <ArrowRight className="w-4 h-4" />
           </button>
-
-          {/* Teal accent line */}
-          <div className="mt-auto mb-10">
-            <div className="h-px w-12 bg-champagne-500 mb-4" />
-            <p className="text-warm-500 text-xs tracking-widest uppercase">Est. 2009 · Paris</p>
+          <div className="mt-auto pt-8 text-[10px] tracking-[0.2em] uppercase text-stone-500">
+            © 2024 Structura
           </div>
         </div>
       </div>

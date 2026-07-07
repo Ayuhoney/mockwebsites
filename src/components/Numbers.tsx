@@ -1,17 +1,67 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 const stats = [
-  { value: '15+', label: 'Years of Clinical Experience', sub: 'Est. 2009, Paris' },
-  { value: '8k+', label: 'Patients Transformed',         sub: 'Across 30+ countries' },
-  { value: '40+', label: 'Treatment Protocols',           sub: 'Medical-grade only' },
-  { value: '98%', label: 'Would Recommend',               sub: 'Based on 2,400 reviews' },
+  { value: 25,   suffix: '+', label: 'Years of Excellence',   sub: 'Est. 2000, global operations' },
+  { value: 500,  suffix: '+', label: 'Projects Delivered',     sub: 'Across 40+ countries' },
+  { value: 2.8,  suffix: 'B', label: 'Construction Value',     sub: 'USD total portfolio' },
+  { value: 98,   suffix: '%', label: 'Client Satisfaction',    sub: 'Based on post-project surveys' },
 ];
 
-const DARK  = '#1A120C';
-const DARK2 = '#3A2E27';
-const MID   = '#5C4F45';
-const LIGHT = '#E8DDD3';
-const GOLD  = '#C8A882';
+function useCountUp(target: number, started: boolean, duration = 1800) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!started) return;
+    let current = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { setCount(target); clearInterval(timer); }
+      else setCount(target < 10 ? parseFloat(current.toFixed(1)) : Math.round(current));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [started, target, duration]);
+  return count;
+}
+
+function StatCard({ value, suffix, label, sub, index, started }: {
+  value: number; suffix: string; label: string; sub: string; index: number; started: boolean;
+}) {
+  const count = useCountUp(value, started);
+  const display = value < 10 ? count.toFixed(1) : Math.round(count);
+
+  return (
+    <div
+      style={{
+        opacity: started ? 1 : 0,
+        transform: started ? 'translateY(0)' : 'translateY(32px)',
+        transition: `opacity 0.7s ease ${index * 150}ms, transform 0.7s ease ${index * 150}ms`,
+      }}
+    >
+      <div className="text-[11px] tracking-[0.3em] uppercase text-stone-600 mb-4 font-mono">
+        {String(index + 1).padStart(2, '0')}
+      </div>
+      <div
+        className="font-serif font-light text-white flex items-start mb-3"
+        style={{ fontSize: 'clamp(52px, 6vw, 92px)', lineHeight: 1 }}
+      >
+        <span>{display}</span>
+        <span className="text-amber-400 text-3xl mt-3 ml-1 font-sans">{suffix}</span>
+      </div>
+      <div
+        style={{
+          height: '1px',
+          background: 'linear-gradient(to right, #F5B520, transparent)',
+          width: started ? '3rem' : '0',
+          marginBottom: '1rem',
+          transition: `width 0.6s ease ${index * 150 + 400}ms`,
+        }}
+      />
+      <div className="text-sm font-semibold text-stone-200 mb-1">{label}</div>
+      <div className="text-[11px] tracking-[0.12em] uppercase text-stone-600">{sub}</div>
+    </div>
+  );
+}
 
 export default function Numbers() {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,70 +77,49 @@ export default function Numbers() {
   }, []);
 
   return (
-    <section style={{ backgroundColor: DARK }} className="py-24">
-      <div ref={ref} className="max-w-screen-xl mx-auto px-8 lg:px-14">
-
-        <div className="flex items-center gap-6 mb-14">
-          <div className="h-px flex-1" style={{ background: DARK2 }} />
-          <div className="eyebrow" style={{ color: MID }}>
-            <span>By The Numbers</span>
+    <section className="bg-stone-900 py-28">
+      <div ref={ref} className="max-w-screen-xl mx-auto px-6 lg:px-12">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20">
+          <div>
+            <div className="eyebrow text-stone-600 mb-6">
+              <span className="eyebrow-line" />
+              <span>By The Numbers</span>
+            </div>
+            <h2
+              className="font-serif font-light text-white leading-[0.92]"
+              style={{ fontSize: 'clamp(38px, 5vw, 68px)' }}
+            >
+              A Legacy Built on<br />
+              <em className="not-italic text-amber-400">Scale & Precision</em>
+            </h2>
           </div>
-          <div className="h-px flex-1" style={{ background: DARK2 }} />
+          <p className="text-stone-400 text-sm leading-relaxed max-w-xs">
+            Two decades of delivering complex construction and engineering projects on every inhabited continent.
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6">
-          {stats.map(({ value, label, sub }, i) => (
-            <div
-              key={label}
-              style={{ opacity: visible ? 1 : 0, transition: `opacity 0.3s ease ${i * 120}ms` }}
-            >
-              <div
-                style={{
-                  fontFamily: 'Cormorant Garamond, Georgia, serif',
-                  fontSize: 'clamp(52px, 6vw, 88px)',
-                  lineHeight: 1,
-                  fontWeight: 300,
-                  color: 'white',
-                  marginBottom: '0.75rem',
-                  animation: visible
-                    ? `flipIn3d 0.85s cubic-bezier(0.16, 1, 0.3, 1) ${i * 130}ms both`
-                    : 'none',
-                }}
-              >
-                {value}
-              </div>
-
-              <div
-                style={{
-                  height: 1,
-                  width: visible ? '2.5rem' : '0px',
-                  backgroundColor: GOLD,
-                  marginBottom: '0.75rem',
-                  transition: `width 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${200 + i * 130}ms`,
-                }}
-              />
-
-              <div className="text-sm font-medium mb-1" style={{ color: LIGHT }}>{label}</div>
-              <div className="text-[11px] tracking-[0.15em] uppercase" style={{ color: MID }}>{sub}</div>
-            </div>
+        {/* Stats grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10">
+          {stats.map((s, i) => (
+            <StatCard key={s.label} {...s} index={i} started={visible} />
           ))}
         </div>
 
+        {/* Bottom CTA */}
         <div
-          className="mt-16 pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
-          style={{ borderTop: `1px solid ${DARK2}` }}
+          className="mt-20 pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
         >
-          <p
-            className="font-serif font-light max-w-xl leading-snug"
-            style={{ fontSize: 'clamp(18px, 2vw, 26px)', color: '#D8CCBF' }}
-          >
-            Your transformation begins with a complimentary consultation — no obligation, complete discretion.
+          <p className="font-serif font-light text-stone-300 max-w-lg leading-snug" style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}>
+            Every structure we build carries our commitment to engineering excellence and architectural integrity.
           </p>
           <button
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="btn-ghost-white flex-shrink-0"
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            className="btn-primary flex-shrink-0 group"
           >
-            Book Now
+            See Our Work
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>
