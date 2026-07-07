@@ -55,20 +55,20 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="services" className="bg-stone-900 py-28">
+    <section id="services" className="bg-stone-200 py-28">
       <div className="max-w-screen-xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div ref={ref} className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div>
             <div
-              className="eyebrow text-stone-600 mb-6"
+              className="eyebrow text-stone-500 mb-6"
               style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.1s' }}
             >
               <span className="eyebrow-line" />
               <span>What We Do</span>
             </div>
             <h2
-              className="font-serif font-light text-white leading-[0.92]"
+              className="font-serif font-light text-stone-900 leading-[0.92]"
               style={{
                 fontSize: 'clamp(38px, 5vw, 68px)',
                 opacity: visible ? 1 : 0,
@@ -77,11 +77,11 @@ export default function Services() {
               }}
             >
               Full-Spectrum<br />
-              <em className="not-italic text-amber-400">Construction Services</em>
+              <em className="not-italic text-amber-600">Construction Services</em>
             </h2>
           </div>
           <p
-            className="text-stone-400 text-sm leading-relaxed max-w-sm"
+            className="text-stone-600 text-sm leading-relaxed max-w-sm"
             style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.7s ease 0.35s' }}
           >
             From initial concept through final handover, our integrated team handles every phase with precision and expertise.
@@ -89,11 +89,11 @@ export default function Services() {
         </div>
 
         {/* Service grid — desktop cards / mobile accordion */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: 'rgba(255,255,255,0.05)' }}>
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-px" style={{ background: 'rgba(106,96,80,0.1)' }}>
           {services.map(({ icon: Icon, title, desc, tags }, i) => (
             <div
               key={title}
-              className="group bg-stone-900 p-8 hover:bg-stone-800 transition-all duration-300 cursor-default"
+              className="group bg-stone-200 p-8 hover:bg-white transition-all duration-300 cursor-default"
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateY(0)' : 'translateY(24px)',
@@ -103,16 +103,16 @@ export default function Services() {
               {/* Icon */}
               <div
                 className="w-12 h-12 flex items-center justify-center mb-6 transition-all duration-300"
-                style={{ border: '1px solid rgba(245,181,32,0.25)', background: 'rgba(245,181,32,0.05)' }}
+                style={{ border: '1px solid rgba(212,148,26,0.4)', background: 'rgba(212,148,26,0.08)' }}
               >
-                <Icon className="w-5 h-5 text-amber-400" />
+                <Icon className="w-5 h-5 text-amber-600" />
               </div>
 
-              <div className="text-[10px] tracking-[0.25em] uppercase text-stone-600 mb-3 font-mono">
+              <div className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mb-3 font-mono">
                 {String(i + 1).padStart(2, '0')}
               </div>
 
-              <h3 className="font-serif text-lg font-light text-white mb-3 group-hover:text-amber-400 transition-colors">
+              <h3 className="font-serif text-lg font-light text-stone-900 mb-3 group-hover:text-amber-700 transition-colors">
                 {title}
               </h3>
 
@@ -120,7 +120,7 @@ export default function Services() {
               <div
                 className="h-px mb-4 transition-all duration-400"
                 style={{
-                  background: 'linear-gradient(to right, rgba(245,181,32,0.6), transparent)',
+                  background: 'linear-gradient(to right, rgba(212,148,26,0.8), transparent)',
                   width: '0',
                 }}
                 ref={(el) => {
@@ -131,14 +131,14 @@ export default function Services() {
                 }}
               />
 
-              <p className="text-stone-400 text-sm leading-relaxed mb-5">{desc}</p>
+              <p className="text-stone-600 text-sm leading-relaxed mb-5">{desc}</p>
 
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => (
                   <span
                     key={tag}
                     className="px-2 py-1 text-[9px] tracking-[0.2em] uppercase text-stone-500"
-                    style={{ border: '1px solid rgba(255,255,255,0.08)' }}
+                    style={{ border: '1px solid rgba(106,96,80,0.15)' }}
                   >
                     {tag}
                   </span>
@@ -153,7 +153,7 @@ export default function Services() {
           {services.map(({ icon: Icon, title, desc, tags }, i) => (
             <div
               key={title}
-              className="border-b border-stone-800"
+              className="border-b border-stone-300"
               style={{ opacity: visible ? 1 : 0, transition: `opacity 0.5s ease ${i * 80}ms` }}
             >
               <button
@@ -161,8 +161,8 @@ export default function Services() {
                 onClick={() => setExpanded(expanded === i ? null : i)}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className="w-5 h-5 text-amber-400 flex-shrink-0" />
-                  <span className="font-serif text-base text-white">{title}</span>
+                  <Icon className="w-5 h-5 text-amber-600 flex-shrink-0" />
+                  <span className="font-serif text-base text-stone-900">{title}</span>
                 </div>
                 <ChevronDown
                   className="w-4 h-4 text-stone-500 flex-shrink-0 transition-transform"
@@ -171,10 +171,10 @@ export default function Services() {
               </button>
               {expanded === i && (
                 <div className="pb-5">
-                  <p className="text-stone-400 text-sm leading-relaxed mb-4">{desc}</p>
+                  <p className="text-stone-600 text-sm leading-relaxed mb-4">{desc}</p>
                   <div className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <span key={tag} className="px-2 py-1 text-[9px] tracking-[0.2em] uppercase text-stone-500 border border-stone-700">
+                      <span key={tag} className="px-2 py-1 text-[9px] tracking-[0.2em] uppercase text-stone-500 border border-stone-300">
                         {tag}
                       </span>
                     ))}

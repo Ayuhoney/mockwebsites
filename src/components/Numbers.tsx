@@ -38,27 +38,27 @@ function StatCard({ value, suffix, label, sub, index, started }: {
         transition: `opacity 0.7s ease ${index * 150}ms, transform 0.7s ease ${index * 150}ms`,
       }}
     >
-      <div className="text-[11px] tracking-[0.3em] uppercase text-stone-600 mb-4 font-mono">
+      <div className="text-[11px] tracking-[0.3em] uppercase text-stone-400 mb-4 font-mono">
         {String(index + 1).padStart(2, '0')}
       </div>
       <div
-        className="font-serif font-light text-white flex items-start mb-3"
+        className="font-serif font-light text-stone-900 flex items-start mb-3"
         style={{ fontSize: 'clamp(52px, 6vw, 92px)', lineHeight: 1 }}
       >
         <span>{display}</span>
-        <span className="text-amber-400 text-3xl mt-3 ml-1 font-sans">{suffix}</span>
+        <span className="text-amber-600 text-3xl mt-3 ml-1 font-sans">{suffix}</span>
       </div>
       <div
         style={{
           height: '1px',
-          background: 'linear-gradient(to right, #F5B520, transparent)',
+          background: 'linear-gradient(to right, #D4941A, transparent)',
           width: started ? '3rem' : '0',
           marginBottom: '1rem',
           transition: `width 0.6s ease ${index * 150 + 400}ms`,
         }}
       />
-      <div className="text-sm font-semibold text-stone-200 mb-1">{label}</div>
-      <div className="text-[11px] tracking-[0.12em] uppercase text-stone-600">{sub}</div>
+      <div className="text-sm font-semibold text-stone-800 mb-1">{label}</div>
+      <div className="text-[11px] tracking-[0.12em] uppercase text-stone-500">{sub}</div>
     </div>
   );
 }
@@ -77,24 +77,24 @@ export default function Numbers() {
   }, []);
 
   return (
-    <section className="bg-stone-900 py-28">
+    <section className="bg-stone-100 py-28">
       <div ref={ref} className="max-w-screen-xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20">
           <div>
-            <div className="eyebrow text-stone-600 mb-6">
+            <div className="eyebrow text-stone-400 mb-6">
               <span className="eyebrow-line" />
               <span>By The Numbers</span>
             </div>
             <h2
-              className="font-serif font-light text-white leading-[0.92]"
+              className="font-serif font-light text-stone-900 leading-[0.92]"
               style={{ fontSize: 'clamp(38px, 5vw, 68px)' }}
             >
               A Legacy Built on<br />
-              <em className="not-italic text-amber-400">Scale & Precision</em>
+              <em className="not-italic text-amber-600">Scale & Precision</em>
             </h2>
           </div>
-          <p className="text-stone-400 text-sm leading-relaxed max-w-xs">
+          <p className="text-stone-600 text-sm leading-relaxed max-w-xs">
             Two decades of delivering complex construction and engineering projects on every inhabited continent.
           </p>
         </div>
@@ -109,9 +109,9 @@ export default function Numbers() {
         {/* Bottom CTA */}
         <div
           className="mt-20 pt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+          style={{ borderTop: '1px solid rgba(106,96,80,0.15)' }}
         >
-          <p className="font-serif font-light text-stone-300 max-w-lg leading-snug" style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}>
+          <p className="font-serif font-light text-stone-700 max-w-lg leading-snug" style={{ fontSize: 'clamp(16px, 2vw, 22px)' }}>
             Every structure we build carries our commitment to engineering excellence and architectural integrity.
           </p>
           <button

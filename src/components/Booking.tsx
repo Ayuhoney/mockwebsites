@@ -31,7 +31,7 @@ const budgets = [
 ];
 
 const inputCls = `
-  w-full bg-stone-50 border border-stone-200
+  w-full bg-white border border-stone-200
   focus:border-amber-400 focus:outline-none
   text-stone-900 placeholder-stone-400
   px-4 py-3 text-sm transition-colors
@@ -53,25 +53,25 @@ export default function Booking() {
   };
 
   return (
-    <section id="contact" className="bg-stone-50">
-      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[420px_1fr]">
+    <section id="contact" className="bg-white">
+      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[400px_1fr]">
 
-        {/* Left — dark info panel */}
-        <div className="bg-stone-900 px-10 py-20 flex flex-col">
-          <div className="eyebrow text-stone-600 mb-8">
+        {/* Left — info panel */}
+        <div className="bg-stone-100 px-10 py-20 flex flex-col">
+          <div className="eyebrow text-stone-400 mb-8">
             <span className="eyebrow-line" />
             <span>Get in Touch</span>
           </div>
 
           <h2
-            className="font-serif font-light text-white leading-[0.92] mb-8"
+            className="font-serif font-light text-stone-900 leading-[0.92] mb-8"
             style={{ fontSize: 'clamp(32px, 4vw, 52px)' }}
           >
             Let's Build<br />
-            <em className="not-italic text-amber-400">Something Great</em>
+            <em className="not-italic text-amber-600">Something Great</em>
           </h2>
 
-          <p className="text-stone-400 text-sm leading-relaxed mb-12">
+          <p className="text-stone-600 text-sm leading-relaxed mb-12">
             Whether you're planning a landmark tower or a precision renovation, our team is ready to discuss your vision. Reach out for a complimentary initial consultation.
           </p>
 
@@ -85,12 +85,12 @@ export default function Booking() {
               <div key={label} className="flex items-start gap-4">
                 <div
                   className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-                  style={{ border: '1px solid rgba(245,181,32,0.25)', background: 'rgba(245,181,32,0.06)' }}
+                  style={{ border: '1px solid rgba(212,148,26,0.4)', background: 'rgba(212,148,26,0.08)' }}
                 >
-                  <Icon className="w-4 h-4 text-amber-400" />
+                  <Icon className="w-4 h-4 text-amber-600" />
                 </div>
                 <div>
-                  <div className="text-white text-sm font-medium">{label}</div>
+                  <div className="text-stone-900 text-sm font-medium">{label}</div>
                   <div className="text-stone-500 text-xs mt-0.5">{sub}</div>
                 </div>
               </div>
@@ -100,22 +100,22 @@ export default function Booking() {
           {/* Credibility bar */}
           <div
             className="mt-auto pt-8"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+            style={{ borderTop: '1px solid rgba(106,96,80,0.12)' }}
           >
             {['ISO 9001 Certified', 'Licensed in 40+ Countries', 'Award-Winning Team'].map((item) => (
               <div key={item} className="flex items-center gap-2 mb-3">
-                <span className="w-1.5 h-1.5 rotate-45 bg-amber-400 flex-shrink-0" />
-                <span className="text-stone-400 text-xs tracking-[0.12em] uppercase">{item}</span>
+                <span className="w-1.5 h-1.5 rotate-45 bg-amber-500 flex-shrink-0" />
+                <span className="text-stone-500 text-xs tracking-[0.12em] uppercase">{item}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right — form */}
-        <div className="px-10 lg:px-16 py-20 bg-white">
+        <div className="px-10 lg:px-16 py-20">
           {submitted ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-20">
-              <CheckCircle className="w-14 h-14 text-amber-400 mb-6" />
+              <CheckCircle className="w-14 h-14 text-amber-500 mb-6" />
               <h3 className="font-serif text-3xl font-light text-stone-900 mb-3">Thank You</h3>
               <p className="text-stone-500 text-sm max-w-xs leading-relaxed">
                 Your inquiry has been received. A senior project consultant will be in touch within one business day.
@@ -180,7 +180,7 @@ export default function Booking() {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
 
-              <p className="text-stone-400 text-xs mt-5 leading-relaxed">
+              <p className="text-stone-500 text-xs mt-5 leading-relaxed">
                 By submitting, you agree to our Privacy Policy. We'll never share your details with third parties.
               </p>
             </form>

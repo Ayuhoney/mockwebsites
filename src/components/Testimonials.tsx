@@ -70,20 +70,20 @@ export default function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section className="bg-stone-800 py-28 overflow-hidden">
+    <section className="bg-stone-100 py-28 overflow-hidden">
       <div ref={ref} className="max-w-screen-xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div>
             <div
-              className="eyebrow text-stone-600 mb-6"
+              className="eyebrow text-stone-400 mb-6"
               style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease 0.1s' }}
             >
               <span className="eyebrow-line" />
               <span>Client Voices</span>
             </div>
             <h2
-              className="font-serif font-light text-white leading-[0.92]"
+              className="font-serif font-light text-stone-900 leading-[0.92]"
               style={{
                 fontSize: 'clamp(38px, 5vw, 68px)',
                 opacity: visible ? 1 : 0,
@@ -92,7 +92,7 @@ export default function Testimonials() {
               }}
             >
               Trusted by<br />
-              <em className="not-italic text-amber-400">Industry Leaders</em>
+              <em className="not-italic text-amber-600">Industry Leaders</em>
             </h2>
           </div>
 
@@ -100,19 +100,19 @@ export default function Testimonials() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => go('prev')}
-              className="w-12 h-12 flex items-center justify-center transition-all duration-200 text-stone-400 hover:text-white"
-              style={{ border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)' }}
+              className="w-12 h-12 flex items-center justify-center transition-all duration-200 text-stone-500 hover:text-stone-900"
+              style={{ border: '1px solid rgba(106,96,80,0.2)', background: 'rgba(255,255,255,0.5)' }}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={() => go('next')}
-              className="w-12 h-12 flex items-center justify-center transition-all duration-200 text-stone-400 hover:text-white"
-              style={{ border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)' }}
+              className="w-12 h-12 flex items-center justify-center transition-all duration-200 text-stone-500 hover:text-stone-900"
+              style={{ border: '1px solid rgba(106,96,80,0.2)', background: 'rgba(255,255,255,0.5)' }}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
-            <span className="text-stone-600 text-sm font-mono ml-2">
+            <span className="text-stone-400 text-sm font-mono ml-2">
               {String(active + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')}
             </span>
           </div>
@@ -127,30 +127,30 @@ export default function Testimonials() {
             {/* Stars */}
             <div className="flex gap-1 mb-8">
               {Array.from({ length: t.rating }).map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />
               ))}
             </div>
 
             {/* Quote */}
             <blockquote
-              className="font-serif font-light text-stone-100 leading-relaxed mb-10"
+              className="font-serif font-light text-stone-800 leading-relaxed mb-10"
               style={{ fontSize: 'clamp(18px, 2.2vw, 28px)' }}
             >
-              <span className="text-amber-400 text-5xl font-serif leading-none mr-1">"</span>
+              <span className="text-amber-500 text-5xl font-serif leading-none mr-1">"</span>
               {t.quote}
             </blockquote>
 
             {/* Author */}
             <div className="flex items-center gap-5">
               <div
-                className="w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-sm text-stone-900"
-                style={{ background: '#F5B520' }}
+                className="w-12 h-12 flex items-center justify-center flex-shrink-0 font-bold text-sm text-white"
+                style={{ background: '#D4941A' }}
               >
                 {t.author.split(' ').map(w => w[0]).join('')}
               </div>
               <div>
-                <div className="font-semibold text-white text-sm">{t.author}</div>
-                <div className="text-stone-400 text-xs">{t.title}</div>
+                <div className="font-semibold text-stone-900 text-sm">{t.author}</div>
+                <div className="text-stone-500 text-xs">{t.title}</div>
               </div>
             </div>
           </div>
@@ -159,16 +159,17 @@ export default function Testimonials() {
           <div
             className="p-8"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: 'white',
+              border: '1px solid rgba(106,96,80,0.12)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.04)',
             }}
           >
-            <div className="text-[9px] tracking-[0.3em] uppercase text-stone-600 mb-4">Project Reference</div>
-            <div className="font-serif text-xl font-light text-white mb-2">{t.project}</div>
-            <div className="h-px w-8 bg-amber-400 mb-4" />
-            <div className="text-stone-400 text-xs mb-6">{t.location}</div>
+            <div className="text-[9px] tracking-[0.3em] uppercase text-stone-400 mb-4">Project Reference</div>
+            <div className="font-serif text-xl font-light text-stone-900 mb-2">{t.project}</div>
+            <div className="h-px w-8 bg-amber-500 mb-4" />
+            <div className="text-stone-500 text-xs mb-6">{t.location}</div>
             <div
-              className="text-3xl font-bold tracking-[0.15em] text-stone-700"
+              className="text-3xl font-bold tracking-[0.15em] text-stone-300"
               style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               {t.company}
@@ -186,7 +187,7 @@ export default function Testimonials() {
               style={{
                 width: i === active ? '2rem' : '0.375rem',
                 height: '0.25rem',
-                background: i === active ? '#F5B520' : 'rgba(255,255,255,0.2)',
+                background: i === active ? '#D4941A' : 'rgba(106,96,80,0.25)',
               }}
             />
           ))}

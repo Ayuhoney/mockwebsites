@@ -29,10 +29,10 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
           background: scrolled
-            ? 'rgba(14,11,8,0.95)'
-            : 'linear-gradient(to bottom, rgba(14,11,8,0.72) 0%, rgba(14,11,8,0.3) 60%, transparent 100%)',
+            ? 'rgba(246,244,240,0.95)'
+            : 'linear-gradient(to bottom, rgba(246,244,240,0.85) 0%, transparent 100%)',
           backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(245,181,32,0.12)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(212,148,26,0.15)' : 'none',
         }}
       >
         <div className="max-w-screen-xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
@@ -41,12 +41,12 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               {/* Mark */}
               <div className="relative w-8 h-8 flex-shrink-0">
-                <div className="absolute inset-0 border border-amber-400 rotate-45 scale-75 transition-transform group-hover:rotate-[135deg] duration-500" />
-                <div className="absolute inset-[5px] bg-amber-400 rotate-45 scale-75" />
+                <div className="absolute inset-0 border border-amber-500 rotate-45 scale-75 transition-transform group-hover:rotate-[135deg] duration-500" />
+                <div className="absolute inset-[5px] bg-amber-500 rotate-45 scale-75" />
               </div>
               <div>
-                <div className="font-sans font-bold text-white tracking-[0.22em] text-sm leading-none">STRUCTURA</div>
-                <div className="font-sans text-[9px] tracking-[0.3em] text-stone-300 uppercase leading-none mt-0.5">Build · Design · Innovate</div>
+                <div className="font-sans font-bold text-stone-900 tracking-[0.22em] text-sm leading-none">STRUCTURA</div>
+                <div className="font-sans text-[9px] tracking-[0.3em] text-stone-500 uppercase leading-none mt-0.5">Build · Design · Innovate</div>
               </div>
             </div>
           </button>
@@ -57,7 +57,7 @@ export default function Navbar() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="amber-underline text-[11px] font-semibold tracking-[0.22em] uppercase text-stone-200 hover:text-white transition-colors"
+                className="amber-underline text-[11px] font-semibold tracking-[0.22em] uppercase text-stone-600 hover:text-stone-900 transition-colors"
               >
                 {label}
               </button>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2 text-white"
+            className="lg:hidden p-2 text-stone-900"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -93,14 +93,14 @@ export default function Navbar() {
       >
         <div
           className="absolute inset-0"
-          style={{ backgroundColor: 'rgba(14,11,8,0.85)' }}
+          style={{ backgroundColor: 'rgba(246,244,240,0.9)' }}
           onClick={() => setOpen(false)}
         />
         <div
           className="absolute top-0 right-0 bottom-0 w-72 flex flex-col p-8 pt-24"
           style={{
-            backgroundColor: '#1C1810',
-            borderLeft: '1px solid rgba(245,181,32,0.15)',
+            backgroundColor: '#F6F4F0',
+            borderLeft: '1px solid rgba(212,148,26,0.2)',
             transform: open ? 'translateX(0)' : 'translateX(100%)',
             transition: 'transform 0.35s cubic-bezier(0.4,0,0.2,1)',
           }}
@@ -110,7 +110,7 @@ export default function Navbar() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="text-left text-lg font-serif font-light text-stone-100 hover:text-amber-400 transition-colors"
+                className="text-left text-lg font-serif font-light text-stone-800 hover:text-amber-600 transition-colors"
               >
                 {label}
               </button>
@@ -119,7 +119,7 @@ export default function Navbar() {
           <button onClick={() => scrollTo('contact')} className="btn-primary justify-center">
             Get a Quote <ArrowRight className="w-4 h-4" />
           </button>
-          <div className="mt-auto pt-8 text-[10px] tracking-[0.2em] uppercase text-stone-500">
+          <div className="mt-auto pt-8 text-[10px] tracking-[0.2em] uppercase text-stone-400">
             © 2024 Structura
           </div>
         </div>
